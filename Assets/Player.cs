@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
-    private static Player _instance;
-
-    public static Player Instance { get { return _instance; } }
-
     [SerializeField] Avatar avatarStats;
     public float maxHealth;
     public float currentHealth;
@@ -18,17 +14,9 @@ public class Player : MonoBehaviour
     public AttackPattern AttackPattern { get => _attackPattern; set {; } } //NO SET SINCE MIGHT CHANGE DURING RUNTIME
     [SerializeField] private AttackPattern _attackPattern;
     //turn neg. health into RAGE? compensates in damage, burst of health/lifesteal
-    private void Awake()
+    private new void Awake()
     {
-        //SINGLETON
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        base.Awake();
 
         //SET STATS
         maxHealth = avatarStats.Health;

@@ -1465,11 +1465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genericsTest:
-    _pooledObjects: []
     _prefab: {fileID: 642959689}
     _amtToPool: 20
   genericsTestAudio:
-    _pooledObjects: []
     _prefab: {fileID: 209136243}
     _amtToPool: 40
 --- !u!4 &2121866902
@@ -1554,11 +1552,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1012144584711692933, guid: 1c46e4e30065fb84894e864c7ac30b14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.94
       objectReference: {fileID: 0}
     - target: {fileID: 1012144584711692933, guid: 1c46e4e30065fb84894e864c7ac30b14, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.27
       objectReference: {fileID: 0}
     - target: {fileID: 1012144584711692933, guid: 1c46e4e30065fb84894e864c7ac30b14, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1595,6 +1593,10 @@ PrefabInstance:
     - target: {fileID: 7180099336094046104, guid: 1c46e4e30065fb84894e864c7ac30b14, type: 3}
       propertyPath: m_Name
       value: PrefabProj Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180099336094046104, guid: 1c46e4e30065fb84894e864c7ac30b14, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : Singleton<ObjectPool>
 {
-    public static ObjectPool instance;
-
     [System.Serializable] internal class ObjectList<T> where T : UnityEngine.Object
     {
-
         public ObjectList(){}
         public ObjectList(List<T> list, T prefab, int amtToPool) { SetList(list); SetPrefab(prefab); SetAmtToPool(amtToPool); }
         List<T> _pooledObjects = new List<T>();
@@ -41,16 +39,6 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] ObjectList<GameObject> genericsTest = new ObjectList<GameObject>();
     [SerializeField] ObjectList<AudioSource> genericsTestAudio = new ObjectList<AudioSource> (); 
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-    }
-
-    //move into delegates and <T> later
-    //this is so ugly i know
     void Start()
     {
         FillPool(genericsTest);
