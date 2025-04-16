@@ -27,7 +27,7 @@ public struct Powerup
 {
     public PowerupType type;
     public PowerupTime time;
-    public PowerupFor powerup;
+    public PowerupFor  powerup;
 
     public float change;
     public float totalTime;
@@ -36,7 +36,5 @@ public struct Powerup
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/PowerUp", order = 1)]
 public class PowerupScriptable : ScriptableObject
 {
-
     public List<Powerup> powerups = new List<Powerup>();
-    //DEBUG
 }

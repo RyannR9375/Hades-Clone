@@ -53,7 +53,7 @@ public class PowerupHolder : MonoBehaviour
     
     private IEnumerator PowerUpOverTime(Powerup powerup)
     {
-        Debug.Log("Activating OT...");
+        //Debug.Log("Activating OT...");
         float totalChange = powerup.type == PowerupType.Buff ? powerup.change : -(powerup.change);
         float rate = totalChange / powerup.totalTime;
         float changed = 0f;
@@ -66,7 +66,7 @@ public class PowerupHolder : MonoBehaviour
 
             if (changeOverFrame > maxChangeAllowed) // Reached max change
             {
-                FindChangingValue(powerup) += maxChangeAllowed; //probably really inefficient
+                FindChangingValue(powerup) += maxChangeAllowed; //probably really inefficient ?
                 yield break;
             }
             else

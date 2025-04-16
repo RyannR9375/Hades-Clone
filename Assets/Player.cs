@@ -45,9 +45,6 @@ public class Player : MonoBehaviour
         
     }
 
-    Rigidbody2D _rb;
-    Vector2 _movement;
-
     private void Update()
     {
         
@@ -58,6 +55,8 @@ public class Player : MonoBehaviour
         
     }
 
+    Rigidbody2D _rb;
+    Vector2 _movement;
     private void OnMove(InputValue data)
     {
         _movement = data.Get<Vector2>();
