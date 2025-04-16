@@ -30,7 +30,6 @@ public class PowerupHolder : MonoBehaviour
 
     ref float FindChangingValue(Powerup powerup)
     {
-        Debug.Log("called");
         switch (powerup.powerup)
         {
             case PowerupFor.Damage:
