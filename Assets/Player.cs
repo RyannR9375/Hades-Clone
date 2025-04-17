@@ -3,29 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : Singleton<Player>
+public class Player : MonoBehaviour, IAttackable
 {
-    [SerializeField] Avatar avatarStats;
-    public float maxHealth;
-    public float currentHealth;
-    public float damage;
-    public float speed;
+    static Player _instance = null;
+    public static Player Instance { get { return _instance; } }
+
+    [SerializeField] internal AvatarScriptable avatarStats;
+    public AttackableBehavior AttackableBehavior { get { return _attackableBehavior; } set { _attackableBehavior = value; } }
+    [SerializeField] internal AttackableBehavior _attackableBehavior;
+
+    internal static Player _player;
+
+    public float MaxHealth
+    {
+        get { return Mathf.Clamp(_maxHealth, 0, _maxHealth); }
+        set { _maxHealth = value; Mathf.Clamp(_maxHealth, 0, _maxHealth >= value ? _maxHealth : value); }
+    }
+    [SerializeReference] internal float _maxHealth;
+
+    public float CurrentHealth
+    {
+        get { return Mathf.Clamp(_currentHealth, 0, _currentHealth); }
+        set { _currentHealth = value; Mathf.Clamp(_currentHealth, 0, _currentHealth >= value ? _currentHealth : value); }
+    }
+    [SerializeReference] internal float _currentHealth;
+
+    public float Damage
+    {
+        get { return Mathf.Clamp(_damage, 0, _damage); }
+        set { _damage = value; Mathf.Clamp(_damage, 0, _damage >= value ? _damage : value); }
+    }
+    [SerializeReference] internal float _damage;
+
+    public float Speed
+    {
+        get { return Mathf.Clamp(_speed, 0, _speed); }
+        set { _speed = value; Mathf.Clamp(_speed, 0, _speed >= value ? _speed : value); }
+    }
+    [SerializeReference] internal float _speed;
     public string PlayerName { get => avatarStats.AvatarName; set => avatarStats.AvatarName = PlayerName; }
     public AttackPattern AttackPattern { get => _attackPattern; set {; } } //NO SET SINCE MIGHT CHANGE DURING RUNTIME
     [SerializeField] private AttackPattern _attackPattern;
+
     //turn neg. health into RAGE? compensates in damage, burst of health/lifesteal
-    private new void Awake()
+    private void Awake()
     {
-        base.Awake();
-
-        //SET STATS
-        maxHealth = avatarStats.Health;
-        currentHealth = avatarStats.Health;
-        damage = avatarStats.Damage;
-        speed = avatarStats.Speed;
-
-        //DEPENDENCIES
-        if (!_rb) TryGetComponent<Rigidbody2D>(out _rb);
+        MakeSingleton();
+        SetValues();
+        SetDependencies();
     }
 
     private void Start()
@@ -36,6 +61,19 @@ public class Player : Singleton<Player>
     private void Update()
     {
         
+    }
+
+    void SetValues()
+    {
+        MaxHealth = avatarStats.Health;
+        CurrentHealth = avatarStats.Health;
+        Damage = avatarStats.Damage;
+        Speed = avatarStats.Speed;
+    }
+
+    void SetDependencies()
+    {
+        if (!_rb) TryGetComponent<Rigidbody2D>(out _rb);
     }
 
     private void FixedUpdate()
@@ -50,24 +88,32 @@ public class Player : Singleton<Player>
         _movement = data.Get<Vector2>();
         _movement = new UnityEngine.Vector2(_movement.x, _movement.y).normalized;
 
-        UnityEngine.Vector3 moveVector = speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_movement);
+        UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_movement);
         _rb.linearVelocity = new UnityEngine.Vector2(moveVector.x, moveVector.y);
     }
 
-    public void SetHealth(float data)
+    void MakeSingleton()
     {
-        if (data < 0) data = 0;
-        currentHealth = data;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            TryGetComponent<Player>(out _instance);
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+    private void OnDestroy()
+    {
+        if (this == _instance)
+        {
+            _instance = null;
+        }
     }
 
-    public void SetDamage(float data)
-    {
-        if (data < 0) data = 0;
-        damage = data;
-    }
-    public void SetSpeed(float data)
-    {
-        if (data < 0) data = 0;
-        speed = data;
-    }
+    public ref float ReturnReferenceHealth() { return ref _currentHealth; }
+    public ref float ReturnReferenceSpeed() { return ref _speed; }
+    public ref float ReturnReferenceDamage() { return ref _damage; }
+    public ref float ReturnReferenceMaxHealth() { return ref _maxHealth; }
 }

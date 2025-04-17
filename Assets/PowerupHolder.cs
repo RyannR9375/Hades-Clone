@@ -6,25 +6,28 @@ using UnityEngine;
 public class PowerupHolder : MonoBehaviour
 {
     public PowerupScriptable powerupObject;
-    public Player receiving;
+    static public Player receiving;
 
     //DEBUG
     private void Start()
     {
-        receiving = Player.Instance;
+        receiving = Player.Instance; //IN OUR TEST CASE,
     }
 
     private void Update()
     {
-        foreach (Powerup x in powerupObject.powerups) Activate(x);
+        Activate();
     }
 
-    void Activate(Powerup powerup)
+    void Activate()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (powerup.time == PowerupTime.Instant) { PowerUpInstant(powerup); }
-            if (powerup.time == PowerupTime.Over_Time) { StartCoroutine(PowerUpOverTime(powerup)); }
+            foreach (Powerup x in powerupObject.powerups)
+            {
+                if (x.time == PowerupTime.Instant) { PowerUpInstant(x); }
+                if (x.time == PowerupTime.Over_Time) { StartCoroutine(PowerUpOverTime(x)); }
+            }
         }
     }
 
@@ -33,15 +36,16 @@ public class PowerupHolder : MonoBehaviour
         switch (powerup.powerup)
         {
             case PowerupFor.Damage:
-                return ref receiving.damage;
+                return ref receiving.ReturnReferenceDamage();
             case PowerupFor.Health:
-                return ref receiving.currentHealth;
+                return ref receiving.ReturnReferenceHealth();
             case PowerupFor.Speed:
-                return ref receiving.speed;
-            default: 
-                return ref receiving.currentHealth;
+                return ref receiving.ReturnReferenceSpeed();
+            default:
+                return ref receiving.ReturnReferenceHealth();
         }
     }
+
 
     private void PowerUpInstant(Powerup powerup)
     {
@@ -51,12 +55,15 @@ public class PowerupHolder : MonoBehaviour
         FindChangingValue(powerup) += change;
     }
     
+    delegate ref float ChangingVal(Powerup powerup);
     private IEnumerator PowerUpOverTime(Powerup powerup)
     {
         //Debug.Log("Activating OT...");
         float totalChange = powerup.type == PowerupType.Buff ? powerup.change : -(powerup.change);
         float rate = totalChange / powerup.totalTime;
         float changed = 0f;
+
+        ChangingVal changingVal = FindChangingValue;
 
         while (true)
         {
@@ -66,12 +73,12 @@ public class PowerupHolder : MonoBehaviour
 
             if (changeOverFrame > maxChangeAllowed) // Reached max change
             {
-                FindChangingValue(powerup) += maxChangeAllowed; //probably really inefficient ?
+                changingVal(powerup) += maxChangeAllowed; //probably really inefficient ?
                 yield break;
             }
             else
             {
-                FindChangingValue(powerup) += changeOverFrame;
+                changingVal(powerup) += changeOverFrame;
                 changed += changeOverFrame;
                 yield return null;
             }

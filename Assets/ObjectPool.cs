@@ -14,7 +14,6 @@ public class ObjectPool : Singleton<ObjectPool>
         [SerializeField] T _prefab;
         [SerializeField] int _amtToPool = 0;
         public int Count { get => _pooledObjects.Count; set {; } }
-        public Type Type { get => _prefab.GetType(); }
 
         //OVERLOAD OPERATOR SO YOU DON'T HAVE TO ACCESS _pooledObjects VARIABLE
         public T this[int key]
@@ -70,7 +69,6 @@ public class ObjectPool : Singleton<ObjectPool>
 
     T GetPooled<T>(ObjectList<T> data) where T : UnityEngine.Component
     {
-        Debug.Log("Size of list: " + data.Count);
         for (int i = 0; i < data.Count; i++)
         {
             if (!data[i].gameObject.activeInHierarchy) return data[i];
@@ -84,7 +82,6 @@ public class ObjectPool : Singleton<ObjectPool>
 
     GameObject GetPooled(ObjectList<GameObject> data)
     {
-        Debug.Log("Size of list: " + data.Count);
         for (int i = 0; i < data.Count; i++)
         {
             if (!data[i].gameObject.activeInHierarchy) return data[i];
