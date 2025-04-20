@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ea3159f8ddb254d9a5a9d089a1ebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boonHolder: {fileID: 11400000, guid: 329ea882d00d4a84fbb456875bf7c24f, type: 2}
+  BoonHolder: {fileID: 11400000, guid: 329ea882d00d4a84fbb456875bf7c24f, type: 2}
 --- !u!4 &598631941
 Transform:
   m_ObjectHideFlags: 0

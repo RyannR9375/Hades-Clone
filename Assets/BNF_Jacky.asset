@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BNF_Jacky
   m_EditorClassIdentifier: 
   familyName: Jacky
-  Powerups:
+  Boons:
   - type: 0
     time: 0
-    powerup: 0
+    boonCategory: 0
     boonName: JACKY DMG
     description: 
     uniqueName: 
@@ -25,19 +25,19 @@ MonoBehaviour:
     totalTime: 0
   - type: 0
     time: 0
-    powerup: 1
-    boonName: JACKY HEALTH
+    boonCategory: 0
+    boonName: 
     description: 
     uniqueName: 
     tier: 0
-    change: 100
+    change: 0
     totalTime: 0
   - type: 0
-    time: 1
-    powerup: 2
-    boonName: JACKY SPEED
+    time: 0
+    boonCategory: 0
+    boonName: 
     description: 
     uniqueName: 
     tier: 0
-    change: 10
-    totalTime: 5
+    change: 0
+    totalTime: 0

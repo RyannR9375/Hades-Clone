@@ -5,10 +5,10 @@ using UnityEngine;
 public class BoonFamily : ScriptableObject
 {
     public string familyName;
-    public List<Boon> Powerups = new List<Boon>();
-    BoonDictionary PowerupDictionary = new BoonDictionary();
+    public List<Boon> Boons = new List<Boon>();
+    BoonDictionary BoonDictionary = new BoonDictionary();
 
-    public void SetDictionary() { PowerupDictionary.SetDictionary(ref Powerups); }
+    public void SetDictionary() { BoonDictionary.SetDictionary(ref Boons); }
 
     public string SetUniqueName(Boon data)
     {
@@ -18,7 +18,7 @@ public class BoonFamily : ScriptableObject
 
     public Boon this[string key]
     {
-        get => PowerupDictionary[key];
-        set => PowerupDictionary[key] = value;
+        get => BoonDictionary[key];
+        set => BoonDictionary[key] = value;
     }
 }

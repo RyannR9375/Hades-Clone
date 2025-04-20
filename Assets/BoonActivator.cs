@@ -7,14 +7,14 @@ using UnityEngine;
 //HAVE SOME SORT OF INTERACT DISTANCE, BRINGS UP A FAMILY OF BOONS
 public class BoonActivator : MonoBehaviour
 {
-    public BoonHolder boonHolder;
-    static public Player receiving;
+    public BoonHolder BoonHolder;
+    static public Player Receiving;
 
     //DEBUG
     private void Start()
     {
-        receiving = Player.Instance; //IN OUR TEST CASE,
-        //boonHolder.SetUniqueNames();
+        Receiving = Player.Instance; //IN OUR TEST CASE,
+        //BoonHolder.SetUniqueNames();
     }
 
     private void Update()
@@ -26,11 +26,12 @@ public class BoonActivator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) //TEMP
         {
-            if (boonHolder == null) return; //NO BOON OBJECT
-            if (boonHolder.BoonFamilies == null || boonHolder.BoonFamilies.Count == 0) return; //EMPTY LIST OF FAMILIES
-            foreach (BoonFamily family in boonHolder.BoonFamilies)
+            if (BoonHolder == null) return; //NO BOON OBJECT
+            if (BoonHolder.BoonFamilies == null || BoonHolder.BoonFamilies.Count == 0) return; //EMPTY LIST OF FAMILIES
+            foreach (BoonFamily family in BoonHolder.BoonFamilies)
             {
-                foreach (Boon powerup in family.Powerups)
+                BoonHolder.Main();
+                foreach (Boon powerup in family.Boons)
                 {
                     if (powerup.time == BoonTime.Instant)   { BoonInstant(powerup); }
                     if (powerup.time == BoonTime.Over_Time) { StartCoroutine(BoonOverTime(powerup)); }
@@ -41,16 +42,16 @@ public class BoonActivator : MonoBehaviour
 
     ref float FindChangingValue(Boon boon)
     {
-        switch (boon.powerup)
+        switch (boon.boonCategory)
         {
-            case BoonFor.Damage:
-                return ref receiving.ReturnReferenceDamage();
-            case BoonFor.Health:
-                return ref receiving.ReturnReferenceHealth();
-            case BoonFor.Speed:
-                return ref receiving.ReturnReferenceSpeed();
+            case BoonCategory.Damage:
+                return ref Receiving.ReturnReferenceDamage();
+            case BoonCategory.Health:
+                return ref Receiving.ReturnReferenceHealth();
+            case BoonCategory.Speed:
+                return ref Receiving.ReturnReferenceSpeed();
             default:
-                return ref receiving.ReturnReferenceHealth();
+                return ref Receiving.ReturnReferenceHealth();
         }
     }
 
