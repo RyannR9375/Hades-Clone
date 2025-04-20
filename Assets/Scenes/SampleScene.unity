@@ -1110,7 +1110,7 @@ GameObject:
   - component: {fileID: 598631941}
   - component: {fileID: 598631940}
   m_Layer: 0
-  m_Name: Powerup Holder
+  m_Name: Boon Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ea3159f8ddb254d9a5a9d089a1ebb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupObject: {fileID: 11400000, guid: 329ea882d00d4a84fbb456875bf7c24f, type: 2}
+  boonHolder: {fileID: 11400000, guid: 329ea882d00d4a84fbb456875bf7c24f, type: 2}
 --- !u!4 &598631941
 Transform:
   m_ObjectHideFlags: 0
@@ -2072,7 +2072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1734711441
 RectTransform:
   m_ObjectHideFlags: 0
