@@ -60,7 +60,7 @@ public class Player : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        
+
     }
 
     void SetValues()
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour, IAttackable
 
     void SetDependencies()
     {
-        if (!_rb) TryGetComponent<Rigidbody2D>(out _rb);
+        if (!_rb) TryGetComponent<Rigidbody>(out _rb);
     }
 
     private void FixedUpdate()
@@ -81,15 +81,15 @@ public class Player : MonoBehaviour, IAttackable
         
     }
 
-    Rigidbody2D _rb;
-    Vector2 _movement;
-    private void OnMove(InputValue data)
+    Rigidbody _rb;
+    Vector2 _move;
+    public void OnMove(InputAction.CallbackContext data)
     {
-        _movement = data.Get<Vector2>();
-        _movement = new UnityEngine.Vector2(_movement.x, _movement.y).normalized;
-
-        UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_movement);
-        _rb.linearVelocity = new UnityEngine.Vector2(moveVector.x, moveVector.y);
+        _move = data.ReadValue<Vector2>();
+        Vector3 movement = new Vector3(_move.x, 0f, _move.y);
+        UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_move);
+        _rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.y);
+        //_rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, 0, moveVector.y);
     }
 
     void MakeSingleton()
