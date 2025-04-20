@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
 
-public class PowerupHolder : MonoBehaviour
+//WILL BE USED FOR ACTIVATING POWERUPS
+public class PowerupActivator : MonoBehaviour
 {
     public PowerupScriptable powerupObject;
     static public Player receiving;
@@ -12,6 +13,7 @@ public class PowerupHolder : MonoBehaviour
     private void Start()
     {
         receiving = Player.Instance; //IN OUR TEST CASE,
+        powerupObject.SetUniqueNames();
     }
 
     private void Update()
