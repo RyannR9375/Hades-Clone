@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Schema;
 using UnityEngine;
 
@@ -57,13 +58,19 @@ public class BoonActivator : MonoBehaviour
     {
         if(boon == null) return;
 
-        //if(boon.Activate == null) Debug.Log("Boon has no action to activate"); //!!!!!
-        //else Debug.Log($"Activating {boon.BoonName} fr this time.");
+        //Debug.Log($"Attempting to activate boon: {boon.BoonName}");
+        if (BoonManager.Instance.ActiveBoons.ContainsKey(boon.UniqueName))
+        {
+            BoonManager.Instance.ActiveBoons[boon.UniqueName].Activate?.Invoke(); //ACTIVATE BOON FROM THE DICTIONARY
+        }
+        else
+        {
+            Boon instance = Instantiate(boon.gameObject, Receiving.transform.position, Quaternion.identity).GetComponent<Boon>(); //Instantiate the boon prefab if it didnt exist in the dictionary
+            instance.Activate?.Invoke(); //Invoke the action associated with the boon
+            BoonManager.Instance.ActiveBoons.Add(boon.UniqueName, instance); //Add the boon to the active boons
+        }
 
-        //boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON
-        Debug.Log($"Attempting to activate boon: {boon.BoonName}"); 
-        boon.Activate.Invoke(); //Invoke the action associated with the boon
-
+        //STAT MODIFIER
         if (boon.StatModifierGroup.StatModifiers.Count == 0) return;
         foreach (StatModifierSingle x in boon.StatModifierGroup.StatModifiers)
         {

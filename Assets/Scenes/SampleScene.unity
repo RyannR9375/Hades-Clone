@@ -2133,6 +2133,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734711440}
   m_CullTransparentMesh: 1
+--- !u!1 &1872800554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1872800556}
+  - component: {fileID: 1872800555}
+  m_Layer: 0
+  m_Name: Boon Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1872800555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872800554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e589c930ce071c744a23106d9f6dfb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1872800556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872800554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.027284145, y: 0.83603644, z: -0.89764214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992795389
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boon_JackyProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 764371445792915093, guid: dc91d019fa18abe4b94be3ac4be440fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5706124111124807695, guid: dc91d019fa18abe4b94be3ac4be440fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 527.6417
@@ -2582,7 +2630,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6418011667105497786, guid: dc91d019fa18abe4b94be3ac4be440fe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2639,6 +2688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stink Bomb Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2658,3 +2711,4 @@ SceneRoots:
   - {fileID: 598631941}
   - {fileID: 2700919829505999422}
   - {fileID: 5042244782437642759}
+  - {fileID: 1872800556}

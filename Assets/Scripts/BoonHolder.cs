@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName = "Boon Holder", menuName = "ScriptableObjects/Boons/Boon Holder", order = 2)]
+//[CreateAssetMenu(fileName = "Boon Holder", menuName = "ScriptableObjects/ActiveBoons/Boon Holder", order = 2)]
 //public class BoonHolder : ScriptableObject
 //{
 //    public List<BoonFamily> BoonFamilies = new List<BoonFamily>();
@@ -14,7 +14,7 @@ using UnityEngine;
 
 //    public void Main() {
 //        //THE LAST PARAMETER IS ALWAYS THE 'OUT' VALUE (RETURN VALUE)
-//        Func<Boon> method = () => BoonFamilies[0].Boons[0]; //JUST OUT (RETURNS A BOON)
+//        Func<Boon> method = () => BoonFamilies[0].ActiveBoons[0]; //JUST OUT (RETURNS A BOON)
 //        string result = method().BoonName;
 
 //        Debug.Log($"Result: {result}");

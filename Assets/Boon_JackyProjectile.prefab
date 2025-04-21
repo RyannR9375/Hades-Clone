@@ -48,4 +48,4 @@ MonoBehaviour:
   _tier: 1
   _description: 
   _statModifierGroup: {fileID: 11400000, guid: a694763b83985d34586ad5482b4fd80d, type: 2}
-  ProjectilePrefab: {fileID: 764371445792915093}
+  ProjectilePrefab: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}

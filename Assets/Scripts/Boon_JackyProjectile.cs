@@ -4,8 +4,9 @@ using UnityEngine;
 public class Boon_JackyProjectile : Boon
 {
     public GameObject ProjectilePrefab;
-    private void Start()
+    private void OnEnable()
     {
+        Debug.Log("Boon_JackyProjectile Start");
         this.Activate = ActivateBoon;
     }
 
@@ -18,7 +19,8 @@ public class Boon_JackyProjectile : Boon
 
     void ActivateBoon()
     {
-            // Implement the logic for activating the boon here
-            Debug.Log($"ACTIVATION COMPLETE!!!!!!: {BoonName}");
+        //Implement the logic for activating the boon here
+        Debug.Log($"ACTIVATION COMPLETE!!!!!!: {BoonName}");
+        Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
     }
 }
