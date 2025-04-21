@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b1c1e38f0469934aa78bf23c59dd1bf, type: 3}
-  m_Name: Stats_Player
+  m_Name: Avatar_Player
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 50

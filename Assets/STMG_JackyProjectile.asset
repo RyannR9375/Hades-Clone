@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d4ea45472cff9498b1e29ec2499ae2, type: 3}
+  m_Name: STMG_JackyProjectile
+  m_EditorClassIdentifier: 
+  StatModifiers:
+  - _type: 0
+    _time: 0
+    _boonCategory: 0
+    _change: 50
+    _totalTime: 0
+  - _type: 0
+    _time: 0
+    _boonCategory: 1
+    _change: 200
+    _totalTime: 0
+  - _type: 0
+    _time: 1
+    _boonCategory: 2
+    _change: 50
+    _totalTime: 3

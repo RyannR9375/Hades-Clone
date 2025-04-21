@@ -14,30 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   familyName: Jacky
   Boons:
-  - type: 0
-    time: 0
-    boonCategory: 0
-    boonName: JACKY DMG
-    description: 
-    uniqueName: 
-    tier: 0
-    change: 500
-    totalTime: 0
-  - type: 0
-    time: 0
-    boonCategory: 0
-    boonName: 
-    description: 
-    uniqueName: 
-    tier: 0
-    change: 0
-    totalTime: 0
-  - type: 0
-    time: 0
-    boonCategory: 0
-    boonName: 
-    description: 
-    uniqueName: 
-    tier: 0
-    change: 0
-    totalTime: 0
+  - {fileID: 6418011667105497786, guid: dc91d019fa18abe4b94be3ac4be440fe, type: 3}

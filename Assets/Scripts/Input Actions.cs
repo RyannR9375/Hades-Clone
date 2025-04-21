@@ -93,7 +93,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""Type"": ""Value"",
                     ""id"": ""08abc593-af84-4103-a022-d0f20cfcf754"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

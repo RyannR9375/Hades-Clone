@@ -29,7 +29,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""WASD"",
-                    ""type"": ""Button"",
+                    ""Type"": ""Button"",
                     ""id"": ""4a38032e-c19d-43fc-912e-8ae717ffc36b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
