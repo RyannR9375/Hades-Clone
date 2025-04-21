@@ -25,7 +25,7 @@ public class BoonActivator : MonoBehaviour
             family.SetUniqueNames();
             foreach(Boon boon in family.Boons)
             {
-                //boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON AN ACTION
+                //boon.ActivateBoon = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON AN ACTION
                 
             }
         }
@@ -48,13 +48,13 @@ public class BoonActivator : MonoBehaviour
                 foreach (Boon boon in family.Boons)
                 {
                     //Debug.Log($"Activating {boon.BoonName}");
-                    Activate(boon);
+                    ActivateBoon(boon);
                 }
             }
         }
     }
 
-    void Activate(Boon boon)
+    void ActivateBoon(Boon boon)
     {
         if(boon == null) return;
 
@@ -69,13 +69,19 @@ public class BoonActivator : MonoBehaviour
             instance.Activate?.Invoke(); //Invoke the action associated with the boon
             BoonManager.Instance.ActiveBoons.Add(boon.UniqueName, instance); //Add the boon to the active boons
         }
+    }
 
-        //STAT MODIFIER
-        if (boon.StatModifierGroup.StatModifiers.Count == 0) return;
-        foreach (StatModifierSingle x in boon.StatModifierGroup.StatModifiers)
+    void ActivateStatModifier(StatModifierGroup statModifierGroup)
+    {
+        if (statModifierGroup == null) return; //IF THE STAT MODIFIER GROUP IS NULL
+        if (statModifierGroup.StatModifiers.Count == 0) return; //IF EMPTY THEN LEAVE,
+        if (statModifierGroup.ActivateOnce == true && statModifierGroup.Activated == true) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED
+
+        statModifierGroup.Activated = true; //SET THE STAT MODIFIER GROUP TO ACTIVATED
+        foreach (StatModifierSingle x in statModifierGroup.StatModifiers)
         {
             if (x == null) return; //IF THE STAT MODIFIER IS NULL
-            if(x.Time == StatTime.Instant)
+            if (x.Time == StatTime.Instant)
             {
                 StatModifierInstant(x);
             }

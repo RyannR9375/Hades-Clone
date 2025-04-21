@@ -19,10 +19,10 @@
 
 //    private void Update()
 //    {
-//        Activate();
+//        ActivateBoon();
 //    }
 
-//    void Activate()
+//    void ActivateBoon()
 //    {
 //        if (Input.GetKeyDown(KeyCode.Space)) //TEMP
 //        {
