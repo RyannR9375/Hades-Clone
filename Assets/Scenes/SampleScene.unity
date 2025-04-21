@@ -2587,6 +2587,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc91d019fa18abe4b94be3ac4be440fe, type: 3}
+--- !u!1001 &5042244782437642759
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.396
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66815843052300727, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
+      propertyPath: m_Name
+      value: Stink Bomb Prefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2600,3 +2657,4 @@ SceneRoots:
   - {fileID: 1071501746}
   - {fileID: 598631941}
   - {fileID: 2700919829505999422}
+  - {fileID: 5042244782437642759}

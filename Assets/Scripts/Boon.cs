@@ -18,7 +18,7 @@ public class Boon : MonoBehaviour, IBoon
     public int Tier { get => _tier; set => _tier = value; }
     [SerializeReference] private int _tier;
     public string Description { get => _description; set => _description = value; }
-    [SerializeReference, TextArea(15, 20)] private string _description;
+    [SerializeReference, TextArea(5, 10)] private string _description;
     [HideInInspector] public string UniqueName { get => _uniqueName; set => _uniqueName = value; }
     private string _uniqueName;
     public StatModifierGroup StatModifierGroup { get => _statModifierGroup; set => _statModifierGroup = value; }

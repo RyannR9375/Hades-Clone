@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5706124111124807695}
-  - component: {fileID: 6418011667105497786}
+  - component: {fileID: 7042661021456337422}
   m_Layer: 0
   m_Name: Boon_JackyProjectile
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6418011667105497786
+--- !u!114 &7042661021456337422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,10 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 764371445792915093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 143cd9145e36c024f96909388f74d088, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e002a7674556db44af4a67eade9608c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _boonName: Stink Bombs
   _tier: 1
-  _description: Jacky summons projectiles!
+  _description: 
   _statModifierGroup: {fileID: 11400000, guid: a694763b83985d34586ad5482b4fd80d, type: 2}
+  ProjectilePrefab: {fileID: 764371445792915093}

@@ -22,10 +22,10 @@ public class BoonActivator : MonoBehaviour
         foreach(BoonFamily family in BoonFamilies)
         {
             family.SetUniqueNames();
-
             foreach(Boon boon in family.Boons)
             {
-                boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON AN ACTION
+                //boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON AN ACTION
+                
             }
         }
     }
@@ -60,7 +60,8 @@ public class BoonActivator : MonoBehaviour
         //if(boon.Activate == null) Debug.Log("Boon has no action to activate"); //!!!!!
         //else Debug.Log($"Activating {boon.BoonName} fr this time.");
 
-        boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON
+        //boon.Activate = BoonDictionary.BoonActions[boon.UniqueName]; //ASSIGN THE BOON
+        Debug.Log($"Attempting to activate boon: {boon.BoonName}"); 
         boon.Activate.Invoke(); //Invoke the action associated with the boon
 
         if (boon.StatModifierGroup.StatModifiers.Count == 0) return;

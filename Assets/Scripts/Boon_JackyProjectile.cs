@@ -3,23 +3,22 @@ using UnityEngine;
 
 public class Boon_JackyProjectile : Boon
 {
-    private void OnEnable()
+    public GameObject ProjectilePrefab;
+    private void Start()
     {
-        SetActivate(ActivateBoon());
+        this.Activate = ActivateBoon;
     }
 
     void SetActivate(Action action)
     {
         Debug.Log("Set Activate Action");
         this.Activate = action;
+        Debug.Log($"Action set to: {this.Activate}");
     }
 
-    Action ActivateBoon()
+    void ActivateBoon()
     {
-        return () =>
-        {
             // Implement the logic for activating the boon here
             Debug.Log($"ACTIVATION COMPLETE!!!!!!: {BoonName}");
-        };
     }
 }
