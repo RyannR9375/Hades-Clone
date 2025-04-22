@@ -6,6 +6,7 @@ using UnityEngine;
 
 //WILL BE USED FOR ACTIVATING POWERUPS INSIDE OF THE SCENE
 //HAVE SOME SORT OF INTERACT DISTANCE, BRINGS UP A FAMILY OF BOONS
+//WILL CREATE AN INSTANCE OF A BOON, AND THEN THE BOON ITSELF WILL BE RESPONSIBLE FOR CONTINUING ANY ACTIVE EFFECTS
 public class BoonActivator : MonoBehaviour
 {
     public List<BoonFamily> BoonFamilies;
@@ -68,79 +69,6 @@ public class BoonActivator : MonoBehaviour
             Boon instance = Instantiate(boon.gameObject, Receiving.transform.position, Quaternion.identity).GetComponent<Boon>(); //Instantiate the boon prefab if it didnt exist in the dictionary
             instance.Activate?.Invoke(); //Invoke the action associated with the boon
             BoonManager.Instance.ActiveBoons.Add(boon.UniqueName, instance); //Add the boon to the active boons
-        }
-    }
-
-    void ActivateStatModifier(StatModifierGroup statModifierGroup)
-    {
-        if (statModifierGroup == null) return; //IF THE STAT MODIFIER GROUP IS NULL
-        if (statModifierGroup.StatModifiers.Count == 0) return; //IF EMPTY THEN LEAVE,
-        if (statModifierGroup.ActivateOnce == true && statModifierGroup.Activated == true) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED
-
-        statModifierGroup.Activated = true; //SET THE STAT MODIFIER GROUP TO ACTIVATED
-        foreach (StatModifierSingle x in statModifierGroup.StatModifiers)
-        {
-            if (x == null) return; //IF THE STAT MODIFIER IS NULL
-            if (x.Time == StatTime.Instant)
-            {
-                StatModifierInstant(x);
-            }
-            else if (x.Time == StatTime.Over_Time)
-            {
-                StartCoroutine(StatModifierOverTime(x));
-            }
-        }
-    }
-
-    ref float FindChangingStat(StatModifierSingle statModifier)
-    {
-        switch (statModifier?.BoonCategory)
-        {
-            case StatCategory.Damage:
-                return ref Receiving.ReturnReferenceDamage();
-            case StatCategory.Health:
-                return ref Receiving.ReturnReferenceHealth();
-            case StatCategory.Speed:
-                return ref Receiving.ReturnReferenceSpeed();
-            default:
-                return ref Receiving.ReturnReferenceHealth();
-        }
-    }
-
-    private void StatModifierInstant(StatModifierSingle statModifier)
-    {
-        //DETERMINE BUFF OR DEBUFF
-        float change = statModifier?.Type == StatType.Buff ? statModifier.Change : -(statModifier.Change);
-        FindChangingStat(statModifier) += change;
-    }
-    
-    delegate ref float ChangingVal(StatModifierSingle statModifier);
-    private IEnumerator StatModifierOverTime(StatModifierSingle statModifier)
-    {
-        //Debug.Log("Activating OT...");
-        float totalChange = statModifier.Type == StatType.Buff ? statModifier.Change : -(statModifier.Change);
-        float rate = totalChange / statModifier.TotalTime;
-        float changed = 0f;
-
-        ChangingVal changingVal = FindChangingStat;
-
-        while (true)
-        {
-            float maxChangeAllowed = totalChange - changed;
-            float changeOverFrame = Time.deltaTime * rate;
-
-
-            if (changeOverFrame > maxChangeAllowed) // Reached max Change
-            {
-                changingVal(statModifier) += maxChangeAllowed; //probably really inefficient ?
-                yield break;
-            }
-            else
-            {
-                changingVal(statModifier) += changeOverFrame;
-                changed += changeOverFrame;
-                yield return null;
-            }
         }
     }
 }

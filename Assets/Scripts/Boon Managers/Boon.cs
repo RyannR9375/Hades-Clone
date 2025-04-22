@@ -27,9 +27,15 @@ public class Boon : MonoBehaviour, IBoon
     [SerializeReference, TextArea(5, 10)] private string _description;
     [HideInInspector] public string UniqueName { get => _uniqueName; set => _uniqueName = value; }
     private string _uniqueName;
+
+    private StatModifierActivator _statModifierActivator;
     public StatModifierGroup StatModifierGroup { get => _statModifierGroup; set => _statModifierGroup = value; }
     [SerializeField] private StatModifierGroup _statModifierGroup;
 
     [SerializeField] public Action Activate { get; set; }
     public virtual void ActivateBoon() { Debug.Log($"Activating {BoonName}."); }
+    public void ActivateStatModifier() {
+        if (_statModifierActivator == null) _statModifierActivator = gameObject.AddComponent<StatModifierActivator>();
+        this._statModifierActivator.ActivateStatModifier(StatModifierGroup);
+    }
 }

@@ -8,7 +8,7 @@ public class Boon_JackyProjectile : Boon
     override public void ActivateBoon()
     {
         Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
-        //base.ActivateStatModifiers();
+        base.ActivateStatModifier();
     }
 
     private void Start()
