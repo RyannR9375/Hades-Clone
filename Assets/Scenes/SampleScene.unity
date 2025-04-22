@@ -267,8 +267,8 @@ GameObject:
   - component: {fileID: 195583406}
   - component: {fileID: 195583405}
   - component: {fileID: 195583403}
-  - component: {fileID: 195583404}
   - component: {fileID: 195583408}
+  - component: {fileID: 195583404}
   - component: {fileID: 195583409}
   m_Layer: 0
   m_Name: Player
@@ -455,7 +455,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
