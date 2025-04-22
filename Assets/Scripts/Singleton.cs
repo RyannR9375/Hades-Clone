@@ -6,7 +6,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     static T _instance = null;
 
-    public static T Instance { get { return _instance; } }
+    public static T Instance { get { return GetSingleton(); } }
 
     internal void Awake()
     {
@@ -27,5 +27,19 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             _instance = null;
         }
+    }
+
+    //probably wouldnt ever work since each singleton/manager typically has predefined gameobject fields that wont be added when the component is added
+    internal static T GetSingleton()
+    {
+        if (_instance == null)
+        {
+            GameObject singleton = new GameObject();
+            singleton.name = typeof(T).Name;
+            _instance = singleton.AddComponent<T>();
+            DontDestroyOnLoad(singleton);
+            return _instance;
+        }
+        else return _instance;
     }
 }
