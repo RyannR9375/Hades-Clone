@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -8,10 +9,13 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject[] boonCollectUIList;
     //[SerializeField] private BoonCollectUIFactory boonCollectUI;
 
+    Boon[] boonList;
     public void ShowBoonCollectUI(Boon[] boonsToDisplay, string familyName)
     {
         if (boonMenu.activeInHierarchy) return; //RETURN IF ALREADY OPEN
         if(boonCollectUIList.Length == 0) { Debug.LogError("No Boon Collect UI Set in UIManager.cs"); return; }
+        boonList = boonsToDisplay;
+
         int idx = 0;
         //BoonCollectUIFactory factory = new BoonCollectUIFactory(boonCollectUIList);
         foreach (Boon x in boonsToDisplay) //FOR EACH BOON
@@ -36,6 +40,13 @@ public class UIManager : Singleton<UIManager>
 
     public void CloseBoonCollectMenu()
     {
+        boonMenu.SetActive(false);
+    }
+
+    public void CloseBoonCollectMenu(GameObject chosen)
+    {
+        int idx = boonCollectUIList.ToList().IndexOf(chosen);
+        BoonManager.Instance.ActivateBoon(boonList[idx]);
         boonMenu.SetActive(false);
     }
 }
