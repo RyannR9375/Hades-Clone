@@ -7,13 +7,13 @@ public class Boon_JackyProjectile : Boon
 
     override public void ActivateBoon()
     {
-        Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
-        base.ActivateStatModifier();
+        InvokeRepeating(nameof(Activation), 0f, 4f);
     }
 
-    private void Start()
+    void Activation()
     {
-        InvokeRepeating(nameof(ActivateBoon), 0, 4f);
+        Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
+        base.ActivateStatModifier();
     }
 
 }

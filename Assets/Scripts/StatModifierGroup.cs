@@ -5,8 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stat Modifier", menuName = "ScriptableObjects/Stats/Stat Modifier Group", order = 1)]
 public class StatModifierGroup : ScriptableObject
 {
-    public bool ActivateOnce;
-    [HideInInspector] public bool Activated = false;
+    public bool ActivateOnce = false;
     public List<StatModifierSingle> StatModifiers = new List<StatModifierSingle>();
 
     public StatModifierSingle this[int key]

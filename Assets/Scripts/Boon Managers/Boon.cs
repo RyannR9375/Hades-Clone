@@ -35,7 +35,7 @@ public class Boon : MonoBehaviour, IBoon
     [SerializeField] public Action Activate { get; set; }
     public virtual void ActivateBoon() { Debug.Log($"Activating {BoonName}."); }
     public void ActivateStatModifier() {
-        if (_statModifierActivator == null) _statModifierActivator = gameObject.AddComponent<StatModifierActivator>();
+        if (!TryGetComponent<StatModifierActivator>(out _statModifierActivator)) _statModifierActivator = gameObject.AddComponent<StatModifierActivator>();
         this._statModifierActivator.ActivateStatModifier(StatModifierGroup);
     }
 }

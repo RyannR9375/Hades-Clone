@@ -9,20 +9,22 @@ using System.Xml.Schema;
 //WILL CONTINUE TO ACTIVATE AS NEEDED
 public class StatModifierActivator : MonoBehaviour
 {
+    private bool _activated = false;
     public static Player Receiving;
 
     private void Start()
     {
         Receiving = Player.Instance;
-    }
+        _activated = false;
+}
 
     public void ActivateStatModifier(StatModifierGroup statModifierGroup)
     {
         if (statModifierGroup == null) return; //IF THE STAT MODIFIER GROUP IS NULL
         if (statModifierGroup.StatModifiers.Count == 0) return; //IF EMPTY THEN LEAVE,
-        if (statModifierGroup.ActivateOnce == true && statModifierGroup.Activated == true) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED
+        if (statModifierGroup.ActivateOnce && _activated) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED
 
-        statModifierGroup.Activated = true; //SET THE STAT MODIFIER GROUP TO ACTIVATED
+        _activated = true; //SET TO TRUE SO WE DON'T ACTIVATE AGAIN INCASE
         foreach (StatModifierSingle x in statModifierGroup.StatModifiers)
         {
             if (x == null) return; //IF THE STAT MODIFIER IS NULL
