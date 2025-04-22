@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &764371445792915093
+--- !u!1 &8118044675874447239
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,55 +8,55 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5706124111124807695}
-  - component: {fileID: 7042661021456337422}
-  - component: {fileID: -6395722718767756261}
+  - component: {fileID: 3023628512654624579}
+  - component: {fileID: 9016325762264975302}
+  - component: {fileID: 494943840412124363}
   m_Layer: 0
-  m_Name: Boon_JackyProjectile
+  m_Name: Boon_JackyInvulnerable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5706124111124807695
+--- !u!4 &3023628512654624579
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764371445792915093}
+  m_GameObject: {fileID: 8118044675874447239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 527.6417, y: 302.47217, z: 3.2620642}
+  m_LocalPosition: {x: 634.81976, y: 325.60324, z: -0.28119013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7042661021456337422
+--- !u!114 &9016325762264975302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764371445792915093}
+  m_GameObject: {fileID: 8118044675874447239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e002a7674556db44af4a67eade9608c, type: 3}
+  m_Script: {fileID: 11500000, guid: 052eb318ab93ec6479efd32ad25d4e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boonName: Stink Bombs
+  _boonName: Jacky Invulnerable
   _tier: 1
-  _description: Summon [BoonName] every [TotalTime2] seconds
+  _description: 1 Instance of Damage every 30 seconds will be protected against you
+    by Jacky!
   _statModifierGroup: {fileID: 11400000, guid: a694763b83985d34586ad5482b4fd80d, type: 2}
-  ProjectilePrefab: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
---- !u!114 &-6395722718767756261
+--- !u!114 &494943840412124363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764371445792915093}
+  m_GameObject: {fileID: 8118044675874447239}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06cee6b88f692684ab8e36c6302352bc, type: 3}

@@ -20,4 +20,26 @@ public class BoonFamily : ScriptableObject
     {
         foreach (Boon boon in Boons) { SetUniqueName(boon); }
     }
+
+    public Boon[] ReturnRandomBoons(int count)
+    {
+        if(count >= Boons.Count) { count = Boons.Count-1; }
+
+        Boon[] boonsToReturn = new Boon[count];
+        List<int> usedIdxs = new();
+
+        for (int i = 0; i < count; ++i) 
+        {
+            int idx = UnityEngine.Random.Range(0, Boons.Count);
+            while (usedIdxs.Contains(idx)){
+                idx = UnityEngine.Random.Range(0, Boons.Count);
+            }
+
+            boonsToReturn[i] = Boons[idx];
+            usedIdxs.Add(idx);
+            //Debug.Log($"Returning Boon: {Boons[i]}");
+        }
+        
+        return boonsToReturn;
+    }
 }
