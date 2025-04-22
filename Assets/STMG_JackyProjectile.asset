@@ -28,4 +28,4 @@ MonoBehaviour:
     _time: 1
     _boonCategory: 2
     _change: 50
-    _totalTime: 3
+    _totalTime: 300

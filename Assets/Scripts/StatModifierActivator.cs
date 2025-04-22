@@ -10,6 +10,8 @@ using System.Xml.Schema;
 public class StatModifierActivator : MonoBehaviour
 {
     private bool _activated = false;
+    [SerializeReference] public bool shouldKeepActivating = true;
+
     public static Player Receiving;
 
     private void Start()
@@ -22,13 +24,13 @@ public class StatModifierActivator : MonoBehaviour
     {
         if (statModifierGroup == null) return; //IF THE STAT MODIFIER GROUP IS NULL
         if (statModifierGroup.StatModifiers.Count == 0) return; //IF EMPTY THEN LEAVE,
-        if (statModifierGroup.ActivateOnce && _activated) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED
+        if (statModifierGroup.ActivateOnce && _activated) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED & WAS SUPPOSED TO ACTIVATE ONCE
 
         _activated = true; //SET TO TRUE SO WE DON'T ACTIVATE AGAIN INCASE
         foreach (StatModifierSingle x in statModifierGroup.StatModifiers)
         {
             if (x == null) return; //IF THE STAT MODIFIER IS NULL
-            if (x.Time == StatTime.Instant)
+            if (x.Time == StatTime.Instant && shouldKeepActivating)
             {
                 StatModifierInstant(x);
             }
@@ -72,7 +74,7 @@ public class StatModifierActivator : MonoBehaviour
 
         ChangingVal changingVal = FindChangingStat;
 
-        while (true)
+        while (shouldKeepActivating)
         {
             float maxChangeAllowed = totalChange - changed;
             float changeOverFrame = Time.deltaTime * rate;
