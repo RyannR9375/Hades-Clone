@@ -10,8 +10,8 @@ public class UIManager : Singleton<UIManager>
 
     public void ShowBoonCollectUI(Boon[] boonsToDisplay, string familyName)
     {
-        if (boonCollectUIList.Length == 0) { Debug.LogError("No Boon Collect UI Set in UIManager.cs"); return; }
-
+        if (boonMenu.activeInHierarchy) return; //RETURN IF ALREADY OPEN
+        if(boonCollectUIList.Length == 0) { Debug.LogError("No Boon Collect UI Set in UIManager.cs"); return; }
         int idx = 0;
         //BoonCollectUIFactory factory = new BoonCollectUIFactory(boonCollectUIList);
         foreach (Boon x in boonsToDisplay) //FOR EACH BOON
