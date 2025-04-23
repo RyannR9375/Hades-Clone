@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7042661021456337422}
   - component: {fileID: -6395722718767756261}
   m_Layer: 0
-  m_Name: Boon_JackyProjectile
+  m_Name: Boon_JackyStinkBombs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   _boonName: Stink Bombs
   _tier: 1
   _description: Summon [BoonName] every [TotalTime2] seconds
+  _canActivateMoreThanOnce: 0
   _statModifierGroup: {fileID: 11400000, guid: a694763b83985d34586ad5482b4fd80d, type: 2}
   ProjectilePrefab: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
 --- !u!114 &-6395722718767756261
@@ -62,4 +63,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cee6b88f692684ab8e36c6302352bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldKeepActivating: 1
+  pauseRepeating: 0

@@ -25,17 +25,32 @@ public class Boon : MonoBehaviour, IBoon
     [SerializeField] private int _tier;
     public string Description { get => _description; set => _description = value; }
     [SerializeField, TextArea(5, 10)] private string _description;
-    [HideInInspector] public string UniqueName { get => _uniqueName; set => _uniqueName = value; }
+    public string UniqueName { get => _uniqueName; set => _uniqueName = value; }
     private string _uniqueName;
+    public bool CanActivateMoreThanOnce { get => _canActivateMoreThanOnce; set => _canActivateMoreThanOnce = value; }
+    [SerializeField] private bool _canActivateMoreThanOnce = false; //IF TRUE, CAN STACK MULTIPLE TIMES
+    internal bool _hasActivated = false;
 
     private StatModifierActivator _statModifierActivator;
     public StatModifierGroup StatModifierGroup { get => _statModifierGroup; set => _statModifierGroup = value; }
     [SerializeField] private StatModifierGroup _statModifierGroup;
 
     [SerializeField] public Action Activate { get; set; }
-    public virtual void ActivateBoon() { Debug.Log($"Activating {BoonName}."); }
+    public virtual void ActivateBoon() {
+        if (_hasActivated && !CanActivateMoreThanOnce) return; //IF THE BOON HAS ALREADY BEEN ACTIVATED AND CANNOT BE ACTIVATED MORE THAN ONCE
+        
+        this.ActivateStatModifier();
+        Debug.Log($"Activating {BoonName}.");
+        _hasActivated = true; //SET TO TRUE SO WE DON'T ACTIVATE AGAIN INCASE
+    }
     public void ActivateStatModifier() {
-        if (!TryGetComponent<StatModifierActivator>(out _statModifierActivator)) _statModifierActivator = gameObject.AddComponent<StatModifierActivator>();
+        //IF DID NOT HAVE THE COMPONENT , THEN ADD IT
+        if (!TryGetComponent<StatModifierActivator>(out _statModifierActivator)) { 
+            _statModifierActivator = gameObject.AddComponent<StatModifierActivator>();
+            Debug.LogWarning($"{BoonName} did not have a StatModifierActivator so it was provided one.");
+        }
+
+        //IF YOU MADE IT THIS FAR, THEN EVERYTHING'S GOOD, AND YOU CAN ACTIVATE THE STAT MODIFIER
         this._statModifierActivator.ActivateStatModifier(StatModifierGroup);
     }
 }

@@ -82,12 +82,11 @@ public class Player : MonoBehaviour, IAttackable
         
     }
 
-    Rigidbody _rb;
-    Vector2 _move;
+    public Rigidbody _rb;
+    public Vector3 _move;
     public void OnMove(InputAction.CallbackContext data)
     {
         _move = data.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(_move.x, 0f, _move.y);
         UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_move);
         _rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, 0, moveVector.y);
         //_rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.y);

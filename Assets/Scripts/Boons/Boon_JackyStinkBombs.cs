@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Boon_JackyProjectile : Boon
+public class Boon_JackyStinkBombs : Boon
 {
     public GameObject ProjectilePrefab;
 

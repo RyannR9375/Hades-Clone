@@ -69,13 +69,19 @@ public class BoonManager : Singleton<BoonManager>
         //Debug.Log($"Attempting to activate boon: {boon.BoonName}");
         if (ActiveBoons.ContainsKey(boon.UniqueName))
         {
-            ActiveBoons[boon.UniqueName].ActivateBoon(); //ACTIVATE BOON FROM THE DICTIONARY
+            //IF THE BOON CAN ACTIVATE MORE THAN ONCE, OR IF THE BOON CAN'T ACTIVATE MORE THAN ONCE BUT ALSO HASN'T BEEN ACTIVATED ALREADY
+            if ((boon.CanActivateMoreThanOnce || (!boon.CanActivateMoreThanOnce && !boon._hasActivated)))
+            {
+                ActiveBoons[boon.UniqueName].ActivateBoon(); //ACTIVATE BOON FROM THE DICTIONARY
+            }
         }
-        else
+        else //OTHERWISE, THE BOON HASN'T BEEN ACTIVATED IN THE SCENE EVER, SINCE IT WASN'T EVEN IN THE LIST OF ACTIVE BOONS, SO WE CAN ACTIVATE IT
         {
             Boon instance = Instantiate(boon.gameObject, Receiving.transform).GetComponent<Boon>(); //Instantiate the boon prefab if it didnt exist in the dictionary
-            instance.ActivateBoon(); //Invoke the action associated with the boon
             ActiveBoons.Add(boon.UniqueName, instance); //Add the boon to the active boons
+            ActiveBoons[boon.UniqueName].ActivateBoon(); //Invoke the action associated with the boon
         }
+
+        boon._hasActivated = true;
     }
 }

@@ -10,27 +10,27 @@ using System.Xml.Schema;
 public class StatModifierActivator : MonoBehaviour
 {
     private bool _activated = false;
-    [SerializeReference] public bool shouldKeepActivating = true;
+    [SerializeReference] public bool pauseModifiers = false; //IF YOU WANT AN OVERTIME ABILITY TO KEEP ACTIVATING, OR DONT YOU CAN SET TO FALSE ANYTIME
 
     public static Player Receiving;
 
     private void Start()
     {
         Receiving = Player.Instance;
-        _activated = false;
-}
+    }
 
     public void ActivateStatModifier(StatModifierGroup statModifierGroup)
     {
+        if (pauseModifiers) return;
         if (statModifierGroup == null) return; //IF THE STAT MODIFIER GROUP IS NULL
         if (statModifierGroup.StatModifiers.Count == 0) return; //IF EMPTY THEN LEAVE,
-        if (statModifierGroup.ActivateOnce && _activated) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED & WAS SUPPOSED TO ACTIVATE ONCE
+        if (statModifierGroup.activateOnce && _activated) return; //IF THE STAT MODIFIER GROUP IS ALREADY ACTIVATED & WAS SUPPOSED TO ACTIVATE ONCE
 
-        _activated = true; //SET TO TRUE SO WE DON'T ACTIVATE AGAIN INCASE
+        _activated = true;
         foreach (StatModifierSingle x in statModifierGroup.StatModifiers)
         {
             if (x == null) return; //IF THE STAT MODIFIER IS NULL
-            if (x.Time == StatTime.Instant && shouldKeepActivating)
+            if (x.Time == StatTime.Instant)
             {
                 StatModifierInstant(x);
             }
@@ -74,7 +74,7 @@ public class StatModifierActivator : MonoBehaviour
 
         ChangingVal changingVal = FindChangingStat;
 
-        while (shouldKeepActivating)
+        while (!pauseModifiers)
         {
             float maxChangeAllowed = totalChange - changed;
             float changeOverFrame = Time.deltaTime * rate;
