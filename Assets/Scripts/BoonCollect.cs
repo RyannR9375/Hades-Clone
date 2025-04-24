@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class BoonCollect : MonoBehaviour, IInteractable
 {
     [SerializeField] private BoonFamily boonFamily;
+    [SerializeField] private int numOfBoonsToShow;
     public Action Interact { get; set; }
 
     public void Start()
@@ -25,5 +26,5 @@ public class BoonCollect : MonoBehaviour, IInteractable
         this.Interact = action;
     }
 
-    private void SendRandomBoons() { UIManager.Instance.ShowBoonCollectUI(boonFamily.ReturnRandomBoons(3), boonFamily.familyName); } 
+    private void SendRandomBoons() { UIManager.Instance.ShowBoonCollectUI(boonFamily.ReturnRandomBoons(numOfBoonsToShow), boonFamily.familyName); } 
 }

@@ -49,7 +49,7 @@ MonoBehaviour:
   _tier: 1
   _description: 1 Instance of Damage every 30 seconds will be protected against you
     by Jacky!
-  _canActivateMoreThanOnce: 1
+  _canActivateMoreThanOnce: 0
   _statModifierGroup: {fileID: 11400000, guid: 912ff53ae1c7e084f934bb59896d56ca, type: 2}
 --- !u!114 &494943840412124363
 MonoBehaviour:
@@ -63,4 +63,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06cee6b88f692684ab8e36c6302352bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseRepeating: 0
+  pauseModifiers: 0

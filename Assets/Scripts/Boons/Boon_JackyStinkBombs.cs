@@ -7,6 +7,7 @@ public class Boon_JackyStinkBombs : Boon
 
     override public void ActivateBoon()
     {
+        Debug.Log($"Activating {BoonName}.");
         InvokeRepeating(nameof(Activation), 0f, 4f);
     }
 

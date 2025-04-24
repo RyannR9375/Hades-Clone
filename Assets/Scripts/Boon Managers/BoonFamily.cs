@@ -28,19 +28,29 @@ public class BoonFamily : ScriptableObject
         Boon[] boonsToReturn = new Boon[count];
         List<int> usedIdxs = new();
 
-        for (int i = 0; i < count; ++i) 
+        //string debug = "";
+        for(int i = 0; i < count; ++i)
         {
-            //SMALL ISSUE OF NOT ALWAYS RETURNING UNIQUE BOONS !!!!!!!!!!!!
-            int idx = UnityEngine.Random.Range(0, Boons.Count);
-            while (usedIdxs.Contains(idx)){
-                idx = UnityEngine.Random.Range(0, Boons.Count);
+            (Boon,int) returnBoon = ReturnRandomBoon();
+            while (usedIdxs.Contains(returnBoon.Item2)){
+                returnBoon = ReturnRandomBoon();
             }
-
-            boonsToReturn[i] = Boons[idx];
-            usedIdxs.Add(idx);
-            //Debug.Log($"Returning Boon: {Boons[i]}");
+            boonsToReturn[i] = returnBoon.Item1;
+            usedIdxs.Add(returnBoon.Item2);
+            //debug += $"{returnBoon.Item1.BoonName}, ";
         }
-        
+        //Debug.Log(debug);
         return boonsToReturn;
+    }
+
+    public (Boon,int) ReturnRandomBoon()
+    {
+        int idx = UnityEngine.Random.Range(0, Boons.Count);
+        while (BoonManager.Instance.ActiveBoons.ContainsValue(Boons[idx]))
+        {
+            int newIdx = UnityEngine.Random.Range(0, Boons.Count);
+            idx = newIdx;
+        }
+        return (Boons[idx], idx);
     }
 }

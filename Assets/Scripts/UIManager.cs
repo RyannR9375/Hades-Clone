@@ -3,65 +3,84 @@ using TMPro;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Pool;
+using System.Collections.Generic;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor;
 
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject boonMenu;
-    [SerializeField] private GameObject boonCollectButton;
+    [SerializeField] private GameObject boonMenu; //CONTAINER
+    [SerializeField] private GameObject boonCollectUIPrefab; //PREFAB
 
     Boon[] boonList;
-    //public void ShowBoonCollectUI(Boon[] boonsToDisplay, string familyName)
-    //{
-    //    if (boonMenu.activeInHierarchy) return; //RETURN IF ALREADY OPEN
-    //    if(boonCollectUIList.Length == 0) { Debug.LogError("No Boon Collect UI Set in UIManager.cs"); return; }
-    //    boonList = boonsToDisplay;
+    static readonly List<GameObject> boonCollectUI = new List<GameObject>();
 
-    //    int idx = 0;
-    //    //BoonCollectUIFactory factory = new BoonCollectUIFactory(boonCollectUIList);
-    //    foreach (Boon x in boonsToDisplay) //FOR EACH BOON
-    //    {
-    //        //1 IS FAMILY NAME
-    //        //2 IS BOON NAME
-    //        //3 IS DESCRIPTION
-    //        TextMeshProUGUI[] TXTComponents = boonCollectUIList[idx].GetComponentsInChildren<TextMeshProUGUI>();
-    //        TXTComponents[0].text = familyName;
-    //        TXTComponents[1].text = x.BoonName;
-    //        TXTComponents[2].text = BoonDescriptionFactory.CreateDescription(x);
-    //        idx++;
-    //    }
-    //    boonMenu.SetActive(true);
-    //    //GameManager.PauseGame();
-    //}
-
+    //REFACTOR TO OBJECT POOLING
     public void ShowBoonCollectUI(Boon[] boonsToDisplay, string familyName)
     {
+        if (boonsToDisplay.Length == 0) { Debug.LogWarning("No boons to display array was passed in 'UIManager.cs'->ShowBoonCollectUI."); return; }
+
+
+        //ClearAndDestroy<GameObject>.Dispose(boonCollectUI);
+
+        int idx = 0;
         foreach (Boon boon in boonsToDisplay)
         {
-            BoonCollectUI boonCollectUI = BoonCollectUIFactory.Empty()
-                .WithFamilyName(familyName)
-                .WithBoonName(boon.BoonName)
-                .WithDescription(BoonDescriptionFactory.CreateDescription(boon))
-                .Build();
 
-            //boonCollectUI.
+            if (boonCollectUI.Count >= boonsToDisplay.Length)
+            {
+                    BoonCollectUIFactory.SetBoonCollectUI(
+                    boon,
+                    familyName,
+                    () => { BoonManager.Instance.ActivateBoon(boon); DisplayBoonCollectMenu(false); },
+                    boonCollectUI[idx].GetComponent<BoonCollectUI>());
+            }
+            else
+            {
+
+                GameObject newBoonCollectUIObject = Instantiate(boonCollectUIPrefab, boonMenu.transform); //Instantiate a new boonCollectUIPrefab
+                                                                                                          //CREATE A 'BoonCollectUI' FOR EACH BOON PASSED TO US
+                if (!newBoonCollectUIObject.TryGetComponent<BoonCollectUI>(out BoonCollectUI newBoonCollectUI))
+                {
+                    Debug.LogWarning($"Could not retrive 'BoonCollectUI' from {boonCollectUIPrefab.name}.");
+                    continue;
+                }
+
+                BoonCollectUIFactory.SetBoonCollectUI(
+                    boon,
+                    familyName,
+                    () => { BoonManager.Instance.ActivateBoon(boon); DisplayBoonCollectMenu(false); },
+                    newBoonCollectUI);
+
+                boonCollectUI.Add(newBoonCollectUIObject);
+            }
+            idx++;
         }
+
+        
+        //DISPLAY THE UI
+        DisplayBoonCollectMenu(true);
     }
 
-    public void PauseGame()
-    {
-        GameManager.PauseGame();
-    }
+    public void DisplayBoonCollectMenu(bool set) => boonMenu.SetActive(set);
 
-    public void CloseBoonCollectMenu()
-    {
-        boonMenu.SetActive(false);
-    }
+    public void PauseGame() => GameManager.PauseGame();
+}
 
-    public void CloseBoonCollectMenu(GameObject chosen)
+public class ClearAndDestroy<T> : MonoBehaviour
+{
+    public static void Dispose(List<T> list)
     {
-        //int idx = boonCollectUIList.ToList().IndexOf(chosen);
-        //BoonManager.Instance.ActivateBoon(boonList[idx]);
-        boonMenu.SetActive(false);
+        foreach (T item in list)
+        {
+            if (item != null)
+            {
+                Destroy(item as UnityEngine.Object);
+            }
+        }
+        list.Clear();
     }
 }

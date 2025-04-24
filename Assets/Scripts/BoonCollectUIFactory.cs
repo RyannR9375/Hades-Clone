@@ -1,45 +1,19 @@
+using System;
+using TMPro;
 using UnityEngine;
-
-//FLUENT BUILDER PATTERN
-public class BoonCollectUI
-{
-    public string FamilyName { get; set; }
-    public string BoonName { get; set; }
-    public string Description { get; set; }
-}
+using UnityEngine.UI;
 
 public class BoonCollectUIFactory : MonoBehaviour
 {
-    private string _familyName;
-    private string _boonName;
-    private string _description;
-
-    public static BoonCollectUIFactory Empty() => new();
-    public BoonCollectUIFactory WithFamilyName(string familyName)
+    public static void SetBoonCollectUI(Boon boon, string familyName, Action action, BoonCollectUI passOut)
     {
-        this._familyName = familyName;
-        return this;
-    }
+        passOut.Button.onClick.RemoveAllListeners(); //Remove all listeners to prevent multiple activations
 
-    public BoonCollectUIFactory WithBoonName(string boonName)
-    {
-        this._boonName = boonName;
-        return this;
-    }
-
-    public BoonCollectUIFactory WithDescription(string description)
-    {
-        this._description = description;
-        return this;
-    }
-
-    public BoonCollectUI Build()
-    {
-        return new BoonCollectUI
-        {
-            FamilyName = _familyName,
-            BoonName = _boonName,
-            Description = _description
-        };
+        //Set its BoonCollectUI components to the new values
+        passOut.FamilyName.text = familyName;
+        passOut.BoonName.text = boon.BoonName;
+        passOut.Description.text = BoonDescriptionFactory.CreateDescription(boon);
+        passOut.StatUpgrades.text = StatModifierDescriptor.CreateDescription(boon.StatModifierGroup);
+        passOut.Button.onClick.AddListener(()=>action?.Invoke());
     }
 }

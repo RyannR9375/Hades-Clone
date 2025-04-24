@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d4ea45472cff9498b1e29ec2499ae2, type: 3}
   m_Name: STMG_JackyStinkBombs
   m_EditorClassIdentifier: 
-  activateOnce: 0
-  hasActivated: 0
+  activateOnce: 1
   StatModifiers:
   - _type: 0
     _time: 0

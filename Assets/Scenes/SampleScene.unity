@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boonFamily: {fileID: 11400000, guid: e5b8ad1a135409e4e800a344243df906, type: 2}
+  numOfBoonsToShow: 3
 --- !u!4 &678773985
 Transform:
   m_ObjectHideFlags: 0
@@ -1284,6 +1285,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 195583403}
+    - target: {fileID: 1485515057090098687, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
+      propertyPath: boonCollectUIPrefab
+      value: 
+      objectReference: {fileID: 6986414820167856186, guid: bedf485fb495189438cd9244aba78de6, type: 3}
     - target: {fileID: 1637651450836903471, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1522,7 +1527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1530,7 +1535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1542,11 +1547,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 411.1714
       objectReference: {fileID: 0}
     - target: {fileID: 7090276724982336405, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20.0787
       objectReference: {fileID: 0}
     - target: {fileID: 7279173980893160455, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1618,7 +1623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407942038022789207, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8435601678204595069, guid: 3bdef2fb991ce31439685a60cb6bfa0b, type: 3}
       propertyPath: m_Name
