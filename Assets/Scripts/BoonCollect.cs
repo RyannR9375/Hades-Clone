@@ -10,7 +10,8 @@ public class BoonCollect : MonoBehaviour, IInteractable
 
     public void Start()
     {
-        SetInteract(SendRandomBoons);
+        //SetInteract(SendRandomBoons);
+        SetInteract(SendAllBoons);
     }
 
     public void Update()
@@ -27,4 +28,5 @@ public class BoonCollect : MonoBehaviour, IInteractable
     }
 
     private void SendRandomBoons() { UIManager.Instance.ShowBoonCollectUI(boonFamily.ReturnRandomBoons(numOfBoonsToShow), boonFamily.familyName); } 
+    private void SendAllBoons() { UIManager.Instance.ShowBoonCollectUI(boonFamily.Boons.ToArray(), boonFamily.familyName); }
 }

@@ -20,6 +20,9 @@ public class StatModifierDescriptor
 {
     public static string CreateDescription(StatModifierGroup statModifierGroup)
     {
+        if(statModifierGroup == null || statModifierGroup.StatModifiers == null || statModifierGroup.StatModifiers.Count == 0) 
+        {  return "No stat modifiers available."; }
+
         StringBuilder stringBuilder = new();
 
         foreach(StatModifierSingle statModifier in statModifierGroup.StatModifiers)

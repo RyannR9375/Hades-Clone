@@ -1,9 +1,13 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Boon_JackyStinkBombs : Boon
 {
-    public GameObject ProjectilePrefab;
+    [SerializeField] GameObject ProjectilePrefab;
+    [SerializeField] float explosionTime = 2f;
+    [SerializeField] float explosionForce = 2000f;
+    [SerializeField] float explosionRadius = 2f;
 
     override public void ActivateBoon()
     {
@@ -13,8 +17,25 @@ public class Boon_JackyStinkBombs : Boon
 
     void Activation()
     {
-        Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
+        GameObject current = Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
+        StartCoroutine(Explode(current));
         base.ActivateStatModifier();
+    }
+
+    private IEnumerator Explode(GameObject current)
+    {
+        yield return new WaitForSeconds(explosionTime);
+        // Add explosion logic here
+        Collider[] colliders = Physics.OverlapSphere(current.transform.position, explosionRadius);
+
+        foreach(Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if(rb) rb.AddExplosionForce(explosionForce * Tier, current.transform.position, explosionRadius);
+        }
+
+        Destroy(current);
+        Debug.Log("BOOM!");
     }
 
 }
