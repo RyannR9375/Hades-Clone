@@ -22,6 +22,7 @@ public class UIManager : Singleton<UIManager>
     public void ShowBoonCollectUI(Boon[] boonsToDisplay, string familyName)
     {
         if (boonsToDisplay.Length == 0) { Debug.LogWarning("No boons to display array was passed in 'UIManager.cs'->ShowBoonCollectUI."); return; }
+        PauseGame();
 
         int idx = 0;
         foreach (Boon boon in boonsToDisplay)
@@ -49,7 +50,7 @@ public class UIManager : Singleton<UIManager>
                 (
                     boon,
                     familyName,
-                    () => { BoonManager.Instance.ActivateBoon(boon); DisplayBoonCollectMenu(false); },
+                    () => { BoonManager.Instance.ActivateBoon(boon); DisplayBoonCollectMenu(false); PauseGame(); },
                     toAlter.GetComponent<BoonCollectUI>()
                 );
             idx++;
@@ -60,5 +61,5 @@ public class UIManager : Singleton<UIManager>
 
     public void DisplayBoonCollectMenu(bool set) => boonMenu.SetActive(set);
 
-    public void PauseGame() => GameManager.PauseGame();
+    public void PauseGame() => GameManager.Instance.PauseGame();
 }
