@@ -22,6 +22,7 @@ public class Boon_JackyStinkBombs : Boon
         base.ActivateStatModifier();
     }
 
+    //super sloppy will fix w/ object pooling etc.
     private IEnumerator Explode(GameObject current)
     {
         yield return new WaitForSeconds(explosionTime);
@@ -31,7 +32,7 @@ public class Boon_JackyStinkBombs : Boon
         foreach(Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if(rb) rb.AddExplosionForce(explosionForce * Tier, current.transform.position, explosionRadius);
+            if(rb && rb != Player.Instance._rb) rb.AddExplosionForce(explosionForce * Tier, current.transform.position, explosionRadius);
         }
 
         Destroy(current);

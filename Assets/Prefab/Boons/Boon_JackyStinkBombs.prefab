@@ -52,7 +52,7 @@ MonoBehaviour:
   _statModifierGroup: {fileID: 11400000, guid: a694763b83985d34586ad5482b4fd80d, type: 2}
   ProjectilePrefab: {fileID: 4533782239605643694, guid: 75b2e89ae75a67f4f89250c3eb1190af, type: 3}
   explosionTime: 2
-  explosionForce: 2
+  explosionForce: 200
   explosionRadius: 5
 --- !u!114 &-6395722718767756261
 MonoBehaviour:
