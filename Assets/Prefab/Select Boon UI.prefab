@@ -851,8 +851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c977a8512c3ca46855f20cefc5e775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FamilyName: {fileID: 336187816862692129}
-  BoonName: {fileID: 3258043529132329258}
-  Description: {fileID: 2986115512713155123}
-  StatUpgrades: {fileID: 3769811407052964319}
-  Button: {fileID: 4538629480007345581}
+  familyName: {fileID: 336187816862692129}
+  boonName: {fileID: 3258043529132329258}
+  description: {fileID: 2986115512713155123}
+  statUpgrades: {fileID: 3769811407052964319}
+  button: {fileID: 4538629480007345581}

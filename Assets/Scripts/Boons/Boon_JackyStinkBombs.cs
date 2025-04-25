@@ -17,7 +17,7 @@ public class Boon_JackyStinkBombs : Boon
 
     void Activation()
     {
-        GameObject current = Instantiate(ProjectilePrefab, Player.Instance.transform.position, Quaternion.identity);
+        GameObject current = Instantiate(ProjectilePrefab, PlayerController.Instance.transform.position, Quaternion.identity);
         StartCoroutine(Explode(current));
         base.ActivateStatModifier();
     }
@@ -32,7 +32,7 @@ public class Boon_JackyStinkBombs : Boon
         foreach(Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if(rb && rb != Player.Instance._rb) rb.AddExplosionForce(explosionForce * Tier, current.transform.position, explosionRadius);
+            if(rb && rb != PlayerController.Instance._rb) rb.AddExplosionForce(explosionForce * Tier, current.transform.position, explosionRadius);
         }
 
         Destroy(current);

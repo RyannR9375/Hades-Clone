@@ -5,10 +5,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IAttackable
 {
     [SerializeField] internal AvatarScriptable avatarStats;
-    public AttackableBehavior AttackableBehavior { get { return _attackableBehavior; } set { _attackableBehavior = value; } }
-    [SerializeField] internal AttackableBehavior _attackableBehavior;
-
-    internal static Player _player;
+    private static PlayerController _playerController;
 
     public float MaxHealth 
     {
@@ -40,7 +37,7 @@ public abstract class Enemy : MonoBehaviour, IAttackable
 
     internal void Start()
     {
-        if (_player == null) _player = Player.Instance;
+        if (_playerController == null) _playerController = PlayerController.Instance;
         MaxHealth = avatarStats.Health;
         CurrentHealth = avatarStats.Health;
         Damage = avatarStats.Damage;

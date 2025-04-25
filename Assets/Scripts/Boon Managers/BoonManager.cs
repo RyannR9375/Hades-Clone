@@ -11,7 +11,7 @@ public class BoonManager : Singleton<BoonManager>
 {
     public Dictionary<string, Boon> ActiveBoons = new Dictionary<string, Boon>();
     public List<BoonFamily> BoonFamilies;
-    static public Player Receiving;
+    static public PlayerController Receiving;
 
     //DEBUG
 
@@ -22,7 +22,7 @@ public class BoonManager : Singleton<BoonManager>
 
     private void Start()
     {
-        Receiving = Player.Instance; //IN OUR TEST CASE,
+        Receiving = PlayerController.Instance; //IN OUR TEST CASE,
         SetUniqueNames();
     }
 

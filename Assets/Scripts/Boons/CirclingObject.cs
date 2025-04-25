@@ -6,7 +6,7 @@ public class CirclingObject : MonoBehaviour
     void Start()
     {
         TryGetComponent<Rigidbody>(out rb);
-        target = Player.Instance.gameObject.transform;
+        target = PlayerController.Instance.gameObject.transform;
     }
     public float speed;
 

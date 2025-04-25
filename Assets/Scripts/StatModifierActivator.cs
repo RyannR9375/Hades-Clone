@@ -12,11 +12,11 @@ public class StatModifierActivator : MonoBehaviour
     private bool _activated = false;
     [SerializeReference] public bool pauseModifiers = false; //IF YOU WANT AN OVERTIME ABILITY TO KEEP ACTIVATING, OR DONT YOU CAN SET TO FALSE ANYTIME
 
-    public static Player Receiving;
+    public static PlayerController Receiving;
 
     private void Start()
     {
-        Receiving = Player.Instance;
+        Receiving = PlayerController.Instance;
     }
 
     public void ActivateStatModifier(StatModifierGroup statModifierGroup)
@@ -43,7 +43,7 @@ public class StatModifierActivator : MonoBehaviour
 
     ref float FindChangingStat(StatModifierSingle statModifier)
     {
-        if (Receiving == null) Receiving = Player.Instance;
+        if (Receiving == null) Receiving = PlayerController.Instance;
         switch (statModifier?.BoonCategory)
         {
             case StatCategory.Damage:

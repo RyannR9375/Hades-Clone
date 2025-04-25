@@ -1,19 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using HadesClone;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour, IAttackable
+public class PlayerController : MonoBehaviour, IAttackable
 {
-    static Player _instance = null;
-    public static Player Instance { get { return _instance; } }
+    static PlayerController _instance = null;
+    public static PlayerController Instance { get { return _instance; } }
 
     [SerializeField] internal AvatarScriptable avatarStats;
-    public AttackableBehavior AttackableBehavior { get { return _attackableBehavior; } set { _attackableBehavior = value; } }
-    [SerializeField] internal AttackableBehavior _attackableBehavior;
-
-    internal static Player _player;
 
     public float MaxHealth
     {
@@ -47,12 +44,45 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] private AttackPattern _attackPattern;
 
     //turn neg. health into RAGE? compensates in damage, burst of health/lifesteal
+
+    private StateMachine _stateMachine;
+    private Animator _animator;
     private void Awake()
     {
         MakeSingleton();
         SetValues();
         SetDependencies();
+        if(!_animator)TryGetComponent<Animator>(out _animator);
+
+        _stateMachine = new StateMachine();
+        var walkState = new WalkState(this, _animator);
+        var attackState = new AttackState(this, _animator);
+        isAttackingClass = new IsAttackingClass();
+
+        At(walkState, attackState, new FuncPredicate(() => (this.isAttackingClass.isAttacking)));
+        At(attackState, walkState, new FuncPredicate(() => !(this.isAttackingClass.isAttacking)));
+        Any(attackState, new FuncPredicate(() => isAttackingClass.isAttacking));
+        
+        _stateMachine.SetState(attackState);
     }
+
+    void At(IState from, IState to, IPredicate condition) => _stateMachine.AddTransition(from, to, condition);
+    void Any(IState to, IPredicate condition) => _stateMachine.AddAnyTransition(to, condition);
+
+    public IEnumerator HandleAttack() {
+            Debug.Log("Attacking");
+
+        yield return new WaitForSeconds(timeBtwAttacks);
+        isAttackingClass.isAttacking = false;
+    }
+
+    private IsAttackingClass isAttackingClass;
+    private class IsAttackingClass {
+        public bool isAttacking{ get; set; }
+    }
+
+    private float timeBtwAttacks = 1.5f;
+    private bool isAttacking;
 
     private void Start()
     {
@@ -61,7 +91,10 @@ public class Player : MonoBehaviour, IAttackable
 
     private void Update()
     {
-
+        if (Keyboard.current.gKey.wasPressedThisFrame) {
+            Debug.Log("got keyboard input");
+            isAttackingClass.isAttacking = true;
+        }
     }
 
     void SetValues()
@@ -84,6 +117,7 @@ public class Player : MonoBehaviour, IAttackable
 
     public Rigidbody _rb;
     public Vector3 _move;
+    
     public void OnMove(InputAction.CallbackContext data)
     {
         _move = data.ReadValue<Vector2>();
@@ -100,10 +134,12 @@ public class Player : MonoBehaviour, IAttackable
         }
         else
         {
-            TryGetComponent<Player>(out _instance);
+            TryGetComponent<PlayerController>(out _instance);
             DontDestroyOnLoad(gameObject);
         }
     }
+    
+    
     private void OnDestroy()
     {
         if (this == _instance)

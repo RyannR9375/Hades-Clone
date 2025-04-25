@@ -5,10 +5,10 @@ using UnityEngine.UI;
 //FLUENT BUILDER PATTERN
 public class BoonCollectUI : MonoBehaviour
 {
-    public TextMeshProUGUI FamilyName;
-    public TextMeshProUGUI BoonName;
-    public TextMeshProUGUI Description;
-    public TextMeshProUGUI StatUpgrades;
-    public Button Button;
+    public TextMeshProUGUI familyName;
+    public TextMeshProUGUI boonName;
+    public TextMeshProUGUI description;
+    public TextMeshProUGUI statUpgrades;
+    public Button button;
     public Action ButtonAction;
 }
