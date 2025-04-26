@@ -5,6 +5,7 @@ using HadesClone;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerController : MonoBehaviour, IAttackable
 {
     static PlayerController _instance = null;
@@ -57,31 +58,24 @@ public class PlayerController : MonoBehaviour, IAttackable
         _stateMachine = new StateMachine();
         var walkState = new WalkState(this, _animator);
         var attackState = new AttackState(this, _animator);
-        isAttackingClass = new IsAttackingClass();
-
-        At(walkState, attackState, new FuncPredicate(() => (this.isAttackingClass.isAttacking)));
-        At(attackState, walkState, new FuncPredicate(() => !(this.isAttackingClass.isAttacking)));
-        Any(attackState, new FuncPredicate(() => isAttackingClass.isAttacking));
+        var idleState = new IdleState(this, _animator);
+        Any(idleState, new FuncPredicate(() => _move == Vector3.zero && !isAttacking));
+        Any(walkState, new FuncPredicate(() => _move != Vector3.zero && !isAttacking));
+        At(walkState, attackState, new FuncPredicate(() => isAttacking && _move != Vector3.zero));
+        At(idleState, attackState, new FuncPredicate(() => isAttacking && _move == Vector3.zero));
         
-        _stateMachine.SetState(attackState);
+        _stateMachine.SetState(walkState);
     }
-
+    
     void At(IState from, IState to, IPredicate condition) => _stateMachine.AddTransition(from, to, condition);
     void Any(IState to, IPredicate condition) => _stateMachine.AddAnyTransition(to, condition);
 
     public IEnumerator HandleAttack() {
-            Debug.Log("Attacking");
-
         yield return new WaitForSeconds(timeBtwAttacks);
-        isAttackingClass.isAttacking = false;
+        isAttacking = false;
     }
 
-    private IsAttackingClass isAttackingClass;
-    private class IsAttackingClass {
-        public bool isAttacking{ get; set; }
-    }
-
-    private float timeBtwAttacks = 1.5f;
+    private float timeBtwAttacks = 0.5f;
     private bool isAttacking;
 
     private void Start()
@@ -91,10 +85,16 @@ public class PlayerController : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        if (Keyboard.current.gKey.wasPressedThisFrame) {
-            Debug.Log("got keyboard input");
-            isAttackingClass.isAttacking = true;
+        if (Mouse.current.leftButton.wasPressedThisFrame && !isAttacking) {
+            //Debug.Log("got keyboard input");
+            isAttacking = true;
         }
+        
+        _stateMachine.Update();
+    }
+
+    private void FixedUpdate() {
+        _stateMachine.FixedUpdate();
     }
 
     void SetValues()
@@ -110,21 +110,19 @@ public class PlayerController : MonoBehaviour, IAttackable
         if (!_rb) TryGetComponent<Rigidbody>(out _rb);
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     public Rigidbody _rb;
     public Vector3 _move;
     
     public void OnMove(InputAction.CallbackContext data)
     {
         _move = data.ReadValue<Vector2>();
+        _move = new Vector3(_move.x, 0, _move.y);
         UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_move);
-        _rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, 0, moveVector.y);
-        //_rb.linearVelocity = new UnityEngine.Vector3(moveVector.x, _rb.linearVelocity.y, moveVector.y);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveVector), 0.15f);
+        //transform.Translate(_move * Speed * Time.fixedDeltaTime, Space.World);
+        _rb.linearVelocity = moveVector;
     }
+
 
     void MakeSingleton()
     {

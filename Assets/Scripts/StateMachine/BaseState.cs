@@ -9,6 +9,7 @@ namespace HadesClone
         protected readonly PlayerController player;
         protected readonly Animator animator;
         
+        protected readonly int IdleHash = Animator.StringToHash("Idle");
         protected readonly int WalkHash = Animator.StringToHash("Walk");
         protected readonly int AttackHash = Animator.StringToHash("Attack");
 
@@ -21,7 +22,7 @@ namespace HadesClone
         
         public virtual void OnEnter()
         {
-            
+            Debug.Log("Entered Base State");
         }
 
         public virtual void Update()

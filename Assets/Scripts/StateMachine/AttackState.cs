@@ -8,12 +8,11 @@ namespace HadesClone {
         public override void OnEnter() {
             Debug.Log("Entered Attack State");
             animator.CrossFade(AttackHash, crossFadeDuration);
+            player.StartCoroutine(player.HandleAttack());
         }
 
-        public override void FixedUpdate() {
+        public override void Update() {
             //call players jump and move logic
-            Debug.Log("Entered Attack State");
-            player.StartCoroutine(player.HandleAttack());
         }
     }
 }

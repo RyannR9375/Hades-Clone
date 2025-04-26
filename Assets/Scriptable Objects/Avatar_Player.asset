@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 50
-  Speed: 300
+  Speed: 100
   AvatarName: Kendra Dookie Bottom
