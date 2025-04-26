@@ -117,10 +117,16 @@ public class PlayerController : MonoBehaviour, IAttackable
     {
         _move = data.ReadValue<Vector2>();
         _move = new Vector3(_move.x, 0, _move.y);
-        UnityEngine.Vector3 moveVector = Speed * Time.fixedDeltaTime * Time.timeScale * transform.TransformDirection(_move);
+        UnityEngine.Vector3 moveVector = Speed * transform.TransformDirection(_move) * Time.fixedDeltaTime * Time.timeScale;
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveVector), 0.15f);
         //transform.Translate(_move * Speed * Time.fixedDeltaTime, Space.World);
+        
         _rb.linearVelocity = moveVector;
+        
+        //_rb.AddForce(moveVector, ForceMode.VelocityChange);
+        
+        //Vector3 newPos = Vector3.MoveTowards(transform.position, transform.position + moveVector, Speed);
+        //_rb.MovePosition(newPos);
     }
 
 

@@ -17,7 +17,8 @@ public class Boon_JackyStinkBombs : Boon
 
     void Activation()
     {
-        GameObject current = Instantiate(ProjectilePrefab, PlayerController.Instance.transform.position, Quaternion.identity);
+        Vector3 spawnPosition = PlayerController.Instance.transform.position + new Vector3(0, 1, 0);
+        GameObject current = Instantiate(ProjectilePrefab, spawnPosition, Quaternion.identity);
         StartCoroutine(Explode(current));
         base.ActivateStatModifier();
     }
